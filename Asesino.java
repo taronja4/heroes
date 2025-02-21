@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Asesino extends heroes {
 
     int sigilo;
 
-    public Asesino(String nombre, int nivel, int HP, arma arma, int sigilo) {
+    public Asesino(String nombre, int nivel, int HP, ArrayList<arma> arma, int sigilo) {
         super(nombre, nivel, HP, arma);
         this.sigilo = sigilo;
     }
@@ -14,10 +16,11 @@ public class Asesino extends heroes {
     @Override
     public String toString() {
         return "Asesino{" +
-                ", nombre='" + nombre + '\'' +
+                "nombre='" + nombre + '\'' +
                 ", nivel=" + nivel +
                 ", HP=" + HP +
-                ",sigilo=" + sigilo +
+                ", sigilo=" + sigilo +
+                ", arma=" + arma +
                 '}';
     }
 }
