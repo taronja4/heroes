@@ -6,20 +6,19 @@ public class heroes {
     int nivel;
     int HP;
 
-    arma arma;
-    ArrayList<heroes> hermandad;
+    ArrayList<arma> arma;
+    ArrayList<heroes> hermandad=new ArrayList<>();;
     ArrayList<arma> armero=new ArrayList<>();
 
     public heroes() {
 
     }
 
-    public heroes(String nombre, int nivel, int HP, arma arma) {
+    public heroes(String nombre, int nivel, int HP, ArrayList<arma> arma) {
         this.nombre = nombre;
         this.nivel = nivel;
         this.HP = HP;
-        this.arma = arma;
-        hermandad=new ArrayList<>();
+        arma = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -41,13 +40,7 @@ public class heroes {
         return -1;
     }
 
-    public boolean addHeroe(heroes he){
-        if (findheroe(he)<0){
-            hermandad.add(he);
-            return true;
-        }
-        return false;
-    }
+
 
     public boolean removeHeroe(heroes hero){
         if (findheroe(hero)>=0){
@@ -79,17 +72,21 @@ public class heroes {
         return -1;
     }
 
-    public boolean addArma(arma he){
-        if (findarma(he)<0){
-            armero.add(he);
-            return true;
+
+
+    public void insertarArmas(){
+        if (armero.isEmpty()){
+            armero.add(new arma("Espada del caos",80));
+            armero.add(new arma("Báculo de la miseria",60));
+            armero.add(new arma("Arco de legolas",60));
+            armero.add(new arma("Daga de las mil sombras",50));
         }
-        return false;
     }
 
     public void printArmas(){
-        for (arma ar:armero){
-            System.out.println(ar);
+        insertarArmas();
+        for (arma pep:armero){
+            System.out.println(pep);
         }
     }
 
@@ -100,82 +97,136 @@ public class heroes {
         System.out.println("4. Asesino");
     }
 
-    public heroes insertarHeore(){
+    public void insertarHeore(){
         Scanner sc=new Scanner(System.in);
+        boolean boo=true;
         System.out.println("Que heroe quieres escoger?");
         tiposHeroe();
         int op;
         do {
-            System.out.println("Introduce un numero valido");
-            op=sc.nextInt();
-            sc.nextLine();
-        }while (op<1||op>4);
-        if (op==1){
-            System.out.println("Introduce el nombre del heroe");
-            String nom=sc.nextLine();
-            System.out.println("Introduce el nivel de tu heroe");
-            int niv=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce los puntos de vida de tu heroe");
-            int hp=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce la fuerza de tu heroe");
-            int strg=sc.nextInt();
-            sc.nextLine();
-            arma pepe=insertarArma();
-            heroes he=new Guerrero(nom,niv,hp,pepe,strg);
-            return he;
-        } else if (op==2){
-            System.out.println("Introduce el nombre del heroe");
-            String nom=sc.nextLine();
-            System.out.println("Introduce el nivel de tu heroe");
-            int niv=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce los puntos de vida de tu heroe");
-            int hp=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce la mana de tu heroe");
-            int mana=sc.nextInt();
-            sc.nextLine();
-            heroes he=new Mago(nom,niv,hp,insertarArma(),mana);
-            return he;
-        } else if (op==3){
-            System.out.println("Introduce el nombre del heroe");
-            String nom=sc.nextLine();
-            System.out.println("Introduce el nivel de tu heroe");
-            int niv=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce los puntos de vida de tu heroe");
-            int hp=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce la punteria de tu heroe");
-            int punt=sc.nextInt();
-            sc.nextLine();
-            heroes he=new Arquero(nom,niv,hp,insertarArma(),punt);
-            return he;
-        } else {
-            System.out.println("Introduce el nombre del heroe");
-            String nom=sc.nextLine();
-            System.out.println("Introduce el nivel de tu heroe");
-            int niv=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce los puntos de vida de tu heroe");
-            int hp=sc.nextInt();
-            sc.nextLine();
-            System.out.println("Introduce el sigilo que tiene tu heroe");
-            int sigi=sc.nextInt();
-            sc.nextLine();
-            heroes he=new Asesino(nom,niv,hp,insertarArma(),sigi);
-            return he;
-        }
+            try {
+                do {
+                    System.out.println("Introduce un numero valido");
+                    op=sc.nextInt();
+                    sc.nextLine();
+                }while (op<1||op>4);
+                if (op==1){
+                    System.out.println("Introduce el nombre del heroe");
+                    String nom=sc.nextLine();
+                    System.out.println("Introduce el nivel de tu heroe");
+                    int niv=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce los puntos de vida de tu heroe");
+                    int hp=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce la fuerza de tu heroe");
+                    int strg=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Cuantas armas quieres que tenga tu heroe?");
+                    int armeo=sc.nextInt();
+                    sc.nextLine();
+                    hermandad.add(new Guerrero(nom,niv,hp,insertarArma(armeo),strg));
+                    boo=false;
+                } else if (op==2){
+                    System.out.println("Introduce el nombre del heroe");
+                    String nom=sc.nextLine();
+                    System.out.println("Introduce el nivel de tu heroe");
+                    int niv=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce los puntos de vida de tu heroe");
+                    int hp=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce la mana de tu heroe");
+                    int mana=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Cuantas armas quieres que tenga tu heroe?");
+                    int armeo=sc.nextInt();
+                    sc.nextLine();
+                    hermandad.add(new Mago(nom,niv,hp,insertarArma(armeo),mana));
+                    boo=false;
+                } else if (op==3){
+                    System.out.println("Introduce el nombre del heroe");
+                    String nom=sc.nextLine();
+                    System.out.println("Introduce el nivel de tu heroe");
+                    int niv=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce los puntos de vida de tu heroe");
+                    int hp=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce la punteria de tu heroe");
+                    int punt=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Cuantas armas quieres que tenga tu heroe?");
+                    int armeo=sc.nextInt();
+                    sc.nextLine();
+                    hermandad.add(new Arquero(nom,niv,hp,insertarArma(armeo),punt));
+                    boo=false;
+                } else if(op==4) {
+                    System.out.println("Introduce el nombre del heroe");
+                    String nom=sc.nextLine();
+                    System.out.println("Introduce el nivel de tu heroe");
+                    int niv=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce los puntos de vida de tu heroe");
+                    int hp=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Introduce el sigilo que tiene tu heroe");
+                    int sigi=sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Cuantas armas quieres que tenga tu heroe?");
+                    int armeo=sc.nextInt();
+                    sc.nextLine();
+                    hermandad.add(new Asesino(nom,niv,hp,insertarArma(armeo),sigi));
+                    boo=false;
+                }
+            }catch (Exception e){
+                System.out.println("Error");
+                sc.nextLine();
+            }
+        }while (boo);
+
+
     }
 
-    public arma insertarArma(){
+
+
+    public ArrayList<arma> insertarArma(int num){
+        int cont=0;
+        ArrayList<arma> bienarmeao=new ArrayList<>();
         Scanner sc=new Scanner(System.in);
-        printArmas();
-        System.out.println("Elige el arma que quieras");
-        int armeo=sc.nextInt();
-        return armero.get(armeo);
+        do {
+            printArmas();
+            System.out.println("Elige el arma que quieras");
+            int armeo=sc.nextInt();
+            arma xd=armero.get(armeo-1);
+            bienarmeao.add(xd);
+            cont++;
+        }while (cont<num);
+        for (arma pepe:bienarmeao){
+            System.out.println(pepe);
+        }
+        return bienarmeao;
+    }
+
+    public void anadirArma(){
+        Scanner sc=new Scanner(System.in);
+        boolean boo=true;
+        insertarArmas();
+        do {
+            try {
+                System.out.println("Introduzca el nombre de la nueva arma");
+                String nome=sc.nextLine();
+                System.out.println("Introduzca la cantidad de daño que quieres que haga el arma");
+                int danyo=sc.nextInt();
+                armero.add(new arma(nome,danyo));
+                System.out.println("Has añadido una nueva arma correctamente");
+                boo=false;
+            }catch (Exception e){
+                System.out.println("Error");
+                sc.nextLine();
+            }
+        }while (boo);
+
     }
 
     public void menu(){
@@ -197,3 +248,4 @@ public class heroes {
                 '}';
     }
 }
+
