@@ -23,9 +23,7 @@ public class arma {
 
     @Override
     public String toString() {
-        return
-                "nombre='" + nombre + '\'' +
-                ", danyo=" + danyo +
-                '}';
+        return nombre + '\'' +
+                        ", danyo=" + danyo ;
     }
 }
