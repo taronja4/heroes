@@ -1,3 +1,5 @@
+import java.security.spec.ECField;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class mainher {
@@ -5,27 +7,53 @@ public class mainher {
         Scanner sc=new Scanner(System.in);
         boolean boo=true;
         heroes paco=new heroes();
-        arma arma1=new arma("Espada del caos",80);
-        arma arma2=new arma("Báculo de la miseria",60);
-        arma arma3=new arma("Arco de legolas",60);
-        arma arma4=new arma("Daga de las mil sombras",50);
-
-        paco.armero.add(arma1);
-        paco.armero.add(arma2);
-        paco.armero.add(arma3);
-        paco.armero.add(arma4);
         do {
-            paco.menu();
-            System.out.println("Introduce una opcion");
-            int opcion=sc.nextInt();
-            switch (opcion){
-                case 1:
-                    paco.addHeroe(paco.insertarHeore());
-                    break;
-                case 2:
-                    paco.printHeroes();
-                    break;
+            try {
+                paco.menu();
+                System.out.println("Introduce una opcion");
+                int opcion=sc.nextInt();
+                switch (opcion){
+                    case 0:
+                        System.out.println("Chao, adeu");
+                        boo=false;
+                        break;
+                    case 1:
+                        paco.insertarHeore();
+                        break;
+                    case 2:
+                        paco.anadirArma();
+                        break;
+                    case 3:
+                        System.out.println("Introduce el nombre del heroe que quieres eliminar");
+                        String mno=sc.next();
+                        sc.nextLine();
+                        if (paco.buscarHeroe(mno)!=null){
+                            paco.removeHeroe(paco.buscarHeroe(mno));
+                        } else {
+                            System.out.println("El heroe con ese nombre no existe en tu gremio");
+                        }
+                        break;
+                    case 4:
+                        System.out.println("Introduce el nombre del heroe que quieres buscar");
+                        String nomo=sc.next();
+                        sc.nextLine();
+                        if (paco.buscarHeroe(nomo)!=null){
+                            System.out.println(paco.buscarHeroe(nomo));;
+                        } else {
+                            System.out.println("El heroe con ese nombre no existe en tu gremio");
+                        }
+                        break;
+                    case 5:
+                        paco.printHeroes();
+                    default:
+                        System.out.println("Introduzca un numero valido ");
+                        sc.nextLine();
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Introduzca un numero valido ");
+                sc.nextLine();
             }
+
         }while (boo);
     }
 }
