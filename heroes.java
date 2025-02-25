@@ -6,7 +6,7 @@ public class heroes {
     int nivel;
     int HP;
 
-    ArrayList<arma> arma;
+    ArrayList<arma> arma=new ArrayList<>();
     ArrayList<heroes> hermandad=new ArrayList<>();;
     ArrayList<arma> armero=new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class heroes {
         this.nombre = nombre;
         this.nivel = nivel;
         this.HP = HP;
-        arma = new ArrayList<>();
+        this.arma=new ArrayList<>(arma);
     }
 
     public String getNombre() {
@@ -126,6 +126,7 @@ public class heroes {
                     int armeo=sc.nextInt();
                     sc.nextLine();
                     hermandad.add(new Guerrero(nom,niv,hp,insertarArma(armeo),strg));
+                    arma.clear();
                     boo=false;
                 } else if (op==2){
                     System.out.println("Introduce el nombre del heroe");
@@ -143,6 +144,7 @@ public class heroes {
                     int armeo=sc.nextInt();
                     sc.nextLine();
                     hermandad.add(new Mago(nom,niv,hp,insertarArma(armeo),mana));
+                    arma.clear();
                     boo=false;
                 } else if (op==3){
                     System.out.println("Introduce el nombre del heroe");
@@ -160,6 +162,7 @@ public class heroes {
                     int armeo=sc.nextInt();
                     sc.nextLine();
                     hermandad.add(new Arquero(nom,niv,hp,insertarArma(armeo),punt));
+                    arma.clear();
                     boo=false;
                 } else if(op==4) {
                     System.out.println("Introduce el nombre del heroe");
@@ -177,6 +180,7 @@ public class heroes {
                     int armeo=sc.nextInt();
                     sc.nextLine();
                     hermandad.add(new Asesino(nom,niv,hp,insertarArma(armeo),sigi));
+                    arma.clear();
                     boo=false;
                 }
             }catch (Exception e){
@@ -248,4 +252,5 @@ public class heroes {
                 '}';
     }
 }
+
 
