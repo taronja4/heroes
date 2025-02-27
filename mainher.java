@@ -44,6 +44,7 @@ public class mainher {
                         break;
                     case 5:
                         paco.printHeroes();
+                        break;
                     default:
                         System.out.println("Introduzca un numero valido ");
                         sc.nextLine();
